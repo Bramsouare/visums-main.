@@ -1,0 +1,46 @@
+@startuml
+abstract class Config{
+  {static} #data : array
+  {static} #components : array
+
+  {static} +saveEnvFile(string) : void
+  {static} +getValue(string) : mixed
+  {static} +setValue(string, mixed) : void
+  {static} +datas() : array
+  {static} +get(string) : mixed
+  {static} +set(string, mixed) : void
+  {static} +init() : void
+  {static} #readEnvFile(string) : void
+}
+
+interface IDb{
+  +query(string, array=[]) : void
+  +fetchAll() : array
+  +fetch() : array
+}
+
+class Db implements IDb{
+  #connexion : PDO
+  #statement : PDOStatement
+  +query(string, array=[]) : void
+  +fetchAll() : array
+  +fetch() : array
+}
+
+interface ILogger{
+  +error(string) : void
+  +warn(string) : void
+  +info(string) : void
+  +debug(string) : void
+  +setLevel(int) : void
+}
+
+class Logger implements ILogger{
+  #level : int
+  +error(string) : void
+  +warn(string) : void
+  +info(string) : void
+  +debug(string) : void
+  +setLevel(int) : void
+}
+@enduml
